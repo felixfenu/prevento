@@ -1,0 +1,87 @@
+[
+ {
+  "id": 1,
+  "nombre": "bjrok",
+  "precio": "",
+  "fecha": "",
+  "categoria": "musica",
+  "descipcion": "Rombai vuelte a la Argentina con su nuevo show presentando nuevo disco.",
+  "imagen": "1666027246662_img_.jpeg",
+  "descripcion": "editado"
+ },
+ {
+  "id": 2,
+  "nombre": "Nicki Nicole Bizarrap",
+  "precio": "1500",
+  "fecha": "",
+  "categoria": "",
+  "descipcion": "Nikki Nicole y Bizarrap se presentan juntos en una noche unica. ",
+  "imagen": "1666137940960_img_.jpeg",
+  "descripcion": ""
+ },
+ {
+  "id": 3,
+  "nombre": "Gorillaz",
+  "precio": "2",
+  "fecha": "2022-11-06",
+  "categoria": "musica",
+  "descipcion": "Gorillaz en Bs As",
+  "imagen": "1666042246480_img_.jpg",
+  "descripcion": "Descripción"
+ },
+ {
+  "id": 4,
+  "nombre": "Prueba",
+  "precio": "2000",
+  "fecha": "",
+  "categoria": "",
+  "descipcion": "Pepe",
+  "imagen": "1666137973565_img_.png",
+  "descripcion": ""
+ },
+ {
+  "id": 6,
+  "nombre": "Maria Becerra concert",
+  "precio": "12222",
+  "fecha": "2022-11-05",
+  "categoria": "musica",
+  "descipcion": "asdas",
+  "imagen": "1666135506791_img_.jpeg"
+ },
+ {
+  "id": 7,
+  "nombre": "Maria Becerra teatro",
+  "precio": "12222",
+  "fecha": "2022-11-05",
+  "categoria": "teatro",
+  "descipcion": "asdas",
+  "imagen": "1666135534394_img_.jpeg"
+ },
+ {
+  "id": 8,
+  "nombre": "NTVG",
+  "precio": "1212321",
+  "fecha": "2022-10-16",
+  "categoria": "deporte",
+  "descipcion": "ASDSAD",
+  "imagen": "1666141739566_img_.png"
+ },
+ {
+  "id": 9,
+  "nombre": "they live",
+  "precio": "12",
+  "fecha": "2022-11-05",
+  "categoria": "infantiles",
+  "descipcion": "horror",
+  "imagen": "1667602694478_img_.jpg"
+ },
+ {
+  "id": 10,
+  "nombre": "evil dead",
+  "precio": "12",
+  "fecha": "2022-11-23",
+  "categoria": "musica",
+  "descipcion": "ss",
+  "imagen": "1669175264481_img_.jpg"
+ }
+]

@@ -1,0 +1,38 @@
+body {
+    background-color: black;
+}
+
+header {
+    background-color: #f7c143;
+    padding-bottom: 1%;
+}
+
+#footdiv {
+    padding-top: 1%;
+    background-color: #f7c143 ;
+    text-align: center;
+    color: black;
+}
+
+#copycontainer {
+    background-color: #000000 ;
+    color: #ffffff ;
+    text-align: center;
+}
+
+.navbar {
+    background-color: #f7c143;
+}
+
+h1 {
+    color: #f7c143;
+}
+
+.login {
+text-align: right;
+}
+
+#buscar {
+    width: 50%;
+    margin: auto;
+}

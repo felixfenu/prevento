@@ -1,0 +1,175 @@
+body {
+    background: linear-gradient(135deg, hsla(0, 0%, 0%, 1) 0%, rgb(24, 24, 24) 86%, rgb(41, 41, 41) 100%);
+}
+
+header {
+    background: linear-gradient(90deg, hsla(42, 92%, 62%, 1) 0%, hsla(42, 68%, 46%, 1) 100%);
+    padding-bottom: 1%;
+    margin-bottom: 5%;
+}
+
+#footdiv {
+    padding: 3%;
+    background: linear-gradient(90deg, hsla(42, 92%, 62%, 1) 0%, hsla(42, 68%, 46%, 1) 100%);
+    text-align: center;
+    color: black;
+    margin-top: 10%;
+    font-weight: 500;
+}
+
+#copycontainer {
+    background-color: #000000 ;
+    color: #ffffff ;
+    text-align: center;
+    margin: auto;
+}
+
+#buscar {
+    width: 50%;
+    margin: auto;
+}
+
+.logo {
+    width: 3%;
+    margin-left:1%;
+    margin-right: 1%;
+}
+
+.navbar {
+    background-color: none !;
+    font-weight: 500;
+}
+
+h1 {
+    color: #f7c143;
+}
+label{
+    color: #ffffff;
+}
+
+.btn-buscar{
+    background-color:#f7c143;
+    border-color: black;
+    color: black;
+}
+
+.btn-buscar {
+    background-color: #6e4d00;
+    border-color: white;
+    color: white;
+}
+
+.btn-buscar:hover {
+    background-color:#8f6400;
+    border-color: #000000;
+    box-shadow: none;
+}
+
+.btn-buscar:active {
+    background-color:#6e4d00;
+    box-shadow: none;
+    border: none;
+}
+
+.btn-buscar:focus   {
+    background-color:#6e4d00;
+    border: none;
+    box-shadow: none !important;
+}
+
+.form-control:focus {
+    box-shadow: none !important;
+}
+ 
+.divform {
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 80%;
+}
+
+.formuinput {
+    background-color: #00000000 !important;
+    border-top: none !important;
+    border-right: none !important;
+    border-left: none !important;
+    border-radius: 0% !important;
+    color: white;
+    text-align: center;
+}
+
+.formuinput::placeholder {
+    color: rgb(170, 170, 170);
+    text-align: center; 
+}
+
+.formuinput:focus {
+    color: rgb(170, 170, 170);
+    text-align: center; 
+}
+
+
+hr {
+    color: #f7c143;
+    margin-bottom: 8%;
+}
+
+
+.container {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.btn {
+    background-color:#f7c143;
+    border-color: black;
+    color: black;
+}
+
+.btn:hover {
+    background-color:#8f6400;
+    border-color: #000000;
+    box-shadow: none;
+}
+
+.btn:active {
+    background-color:#6e4d00;
+    box-shadow: none;
+    border: none;
+}
+
+.btn:focus   {
+    background-color:#6e4d00;
+    border: none;
+    box-shadow: none !important;
+}
+
+.btn-formu {
+    display: block;
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-control:focus {
+   box-shadow:none;
+   border-color: #f7c143;
+}
+
+.img-der {
+    background-image: url("../images/crea-tu-cuenta.jpg");
+    background-size: cover;
+}
+
+.contenedor {
+    background-color: #2b2b2b42;
+    border-color: #f7c143;
+    border-style: solid;
+}
+
+.titulo-login{
+    color: #f7c143;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 4%;
+}

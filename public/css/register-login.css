@@ -1,0 +1,138 @@
+h1 {
+    color: #152534;
+}
+
+label{
+    color: #ffffff;
+}
+
+.form-control:focus {
+    box-shadow: none !important;
+}
+ 
+.divform {
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 80%;
+}
+
+.formuinput {
+    background-color: #00000000 !important;
+    border-top: none !important;
+    border-right: none !important;
+    border-left: none !important;
+    border-radius: 0% !important;
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+.formuinput::placeholder {
+    color: rgb(170, 170, 170);
+    text-align: center; 
+}
+
+.formuinput:focus {
+    color: rgb(170, 170, 170);
+    text-align: center; 
+    border-color:#f7c143;
+}
+
+
+hr {
+    color: #f7c143;
+    margin-bottom: 8%;
+}
+
+
+.container {
+    margin-top: 5%;
+    margin-bottom: 10%;
+
+}
+
+.btn-formu {
+    background-color:#55CADB;
+    border-color: #55CADB;
+    color: #ffffff;
+    display: block;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-formu-2 {
+    background-color:#414141;
+    border-color: #000000;
+    color: #ffffff;
+    display: block;
+    margin-top: 0%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-formu:hover {
+    background-color: #55CADB;
+    border-color: #55CADB;
+    box-shadow: none;
+}
+
+.btn-formu:active {
+    background-color:#55CADB !important;
+    border-color: white !important;
+    color: white !important;
+    box-shadow: none !important;
+    font-size: 98%;
+}
+
+.btn-formu:focus {
+    background-color:#55CADB;
+    border-color: #55CADB;
+    color: #ffffff;
+    display: block;
+}
+
+.btn-formu-2:hover {
+    background-color: #949494;
+    border-color: #000000;
+    box-shadow: none;
+}
+
+.btn-formu-2:focus {
+    background-color:#414141;
+    border-color: #ffffff;
+    color: #ffffff;
+    display: block;
+}
+
+.btn-formu-2:active {
+    background-color:#353535 !important;
+    border-color: rgb(0, 0, 0) !important;
+    color: white !important;
+    box-shadow: none !important;
+    font-size: 98%;
+}
+
+.img-reg {
+    background-image: url("../images/crea-tu-cuenta.jpg");
+    background-size: cover;
+}
+
+.img-log {
+    background-image: url("../images/accede-a-tu-cuenta.jpg");
+    background-size: cover;
+}
+
+
+.contenedor {
+    border-color: white;
+    border-style: solid;
+}
+
+.titulo-login-register{
+    color: #152534;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 4%;
+    margin-top: 4%;
+}

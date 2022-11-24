@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Open+Sans:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Open+Sans&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"); /* iconos */
+body {
+    background-color: #F1F1F1;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+a:active{
+    color: white;
+}
+a:focus{
+    color: white;
+}
+#tipografia-logo{
+    font-family: 'Open Sans', sans-serif;
+    margin-right: 20px;
+    color: #152534;
+
+}
+tipografia-logo2{
+    font-family: 'Open Sans', sans-serif;
+    margin-right: 20px;
+    color: white;
+    margin-top: 1200px;
+}
+.icono-carrito{
+    font-size: 25px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: white;
+    
+}
+
+header {
+    background-color: #FBC512;
+    padding-bottom: 1%;
+}
+.nav-link {
+    color: #152534 !important; 
+    /* font-family: 'Comfortaa', sans-serif; */
+    font-weight: 400;
+}
+
+#footdiv {
+    margin-top: 40px;
+    padding-top: 3%;
+    background-color: #303030 ;
+    text-align: center;
+    color: white;
+}
+
+#copycontainer {
+    background-color: #000000 ;
+    color: #152534 ; 
+    text-align: center;
+    margin: auto;
+}
+
+.navbar {
+    background-color: #FBC512;
+    font-weight: 500;
+    color: #152534 !important;
+}
+
+
+#buscar {
+    width: 50%;
+    margin: auto;
+}
+
+.btn-buscar {
+    background-color:#55CADB;
+    border-color: #55CADB;
+    color: white;
+}
+
+.btn-buscar:hover {
+    background-color:#55CADB;
+    border-color: white;
+    box-shadow: none;
+}
+
+.btn-buscar:active {
+    background-color:#55CADf;
+    box-shadow: none;
+    border: none;
+}
+
+.btn-buscar:focus {
+    background-color:#55CADf;
+    border: none;
+    box-shadow: none !important;
+}
+
+.logo {
+    width: 38px;
+    margin-left:6px;
+    margin-right: 3px;
+}
+
+.login {
+    text-align: right;
+}
+
+@media only screen and (max-width: 600px) {
+    #buscar {
+        width: 75%;
+    }
+  }

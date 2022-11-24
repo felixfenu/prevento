@@ -1,0 +1,50 @@
+
+h1 {
+    color: #f7c143;
+}
+
+.card {
+    width: 280px;
+    display:inline-block;
+    margin: 10px;
+    background-color: white;
+    color: #4F4F4F !important;
+    border-color: white;
+    cursor: pointer;
+}
+
+.tarj-container{
+    color: #4F4F4F !important;
+}
+
+.categoria-title {
+    margin-top: 5%;
+    margin-left: 2%;
+}
+
+h5.card-title , .categoria-title { 
+    color:#152534;
+    letter-spacing: 1px;
+}
+
+.carousel-control-next , .carousel-control-prev {
+    text-decoration: none !important;
+    font-size: 150%;
+}
+.tarjetas {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+.carousel {
+    width: 98%;
+    margin: auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+@media only screen and (max-width: 540px) {
+    .card {
+        width: 100%;
+    }
+  }
