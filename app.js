@@ -1,11 +1,11 @@
 // arrancar el proyecto
-// 1-npm install
+// 1-npm install arracar proyecto
 // 2-npm install multer (MULTER)
 // 3 npm install bcryptjs(HASHING, encriptar claves)
 // 4 npm install express-validator (express validator)
-// 5 npm install sequelize-cli 
-// 6 npm install sequelize
-// 7 npm install mysql2
+// 5 npm install sequelize-cli proyecto
+// 6 npm install sequelize proyecto
+// 7 npm install mysql2 proyecto
 // 8 npm install dotenv(alwaysdata)
 // ARRANCAR CON npm start
 

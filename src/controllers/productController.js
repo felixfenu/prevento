@@ -28,6 +28,7 @@ const controller = {
 
 		});
 	},
+	// no 
 	vistaCrearProd: (req, res) => {
 		res.render('products/crear')
 	},
