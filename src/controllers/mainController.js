@@ -23,8 +23,7 @@ const controller = {
     // Root - Show all products|
 // FUNCIONA CON DB
 index: (req, res) => {
-    // const eventos = JSON.parse(fs.readFileSync(pathProductDb, 'utf-8'));
-    // res.render('products/home',{evento: eventos})
+
 
 		db.evento.findAll().then((evento) =>{
 

@@ -3,6 +3,7 @@ const fs = require('fs');
 
 // requerimiento del modelo de base de datos 
 const db = require('../database/models');
+const { set } = require('../../app');
 
 const pathProductDb = path.join(__dirname, '../data/eventos.json');
 const eventos = JSON.parse(fs.readFileSync(pathProductDb, 'utf-8'));
@@ -11,8 +12,6 @@ const eventos = JSON.parse(fs.readFileSync(pathProductDb, 'utf-8'));
 const controller = {
 	// FUNCIONA CON DB
 	vistaListadoProd: (req, res) => {
-		// const eventos = JSON.parse(fs.readFileSync(pathProductDb, 'utf-8'));
-		// res.render('products/home',{evento: eventos})
 
 		// las llamadas de las tablas se hacen por el alias
 		db.evento.findAll().then((evento) =>{
@@ -143,29 +142,22 @@ const controller = {
 
 	},
 
-	// falta conectar a la db
+	// FUNCIONA CON DB
+	// elimina un evento de la base de datos
 	accionEliminar: (req, res) => {
 
-		let id = req.params.id;
-		let ProductoEncontrado;
+		let idURL = req.params.id;
 
-		let Nproducts = eventos.filter(function(e){
-			return id!=e.id;
+		// desactivo las claves foraneas la tabla evento para poder eliminar
+		db.evento.FOREIGN_KEY_CHECKS=0;
+
+	
+		db.evento.destroy({
+			where :{id:idURL}
 		})
 
-		for (let producto of eventos){
-			if (producto.id == id){
-			    ProductoEncontrado=producto;
-			}
-		}
-
-		// en el metodo delte usamos una nueva linea para borrar que es la siguiente
-		// fs.unlinkSync(path.join(__dirname, '../../public/images/products/', ProductoEncontrado.image));
-		// aca le pasamos la direccion de la imagen que deseamos borrar
-		// borra el archivo
-		fs.unlinkSync(path.join(__dirname, '../../public/images/uploads/', ProductoEncontrado.imagen));
-
-		fs.writeFileSync(pathProductDb, JSON.stringify(Nproducts,null,' '));
+		// lactivo de nuevo las claves foraneas en la tabla evento
+		db.evento.FOREIGN_KEY_CHECKS=1;
 
 		res.redirect('/');
 	},
