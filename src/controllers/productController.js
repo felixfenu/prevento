@@ -5,10 +5,6 @@ const fs = require('fs');
 const db = require('../database/models');
 const { set } = require('../../app');
 
-const pathProductDb = path.join(__dirname, '../data/eventos.json');
-const eventos = JSON.parse(fs.readFileSync(pathProductDb, 'utf-8'));
-
-
 const controller = {
 	// FUNCIONA CON DB
 	vistaListadoProd: (req, res) => {
@@ -105,40 +101,27 @@ const controller = {
 
 	},
 
-	// falta conectar a la db
+	// FUNCIONA CON DB
 	accionEditar: (req, res) => {
-		let id = req.params.id;
-		if (req.file == null) {
-			for (let s of eventos){
-				if (id==s.id){
-					s.nombre= req.body.name;
-					s.precio= req.body.price;
-					s.fecha= req.body.date;
-					s.categoria= req.body.category;
-					s.descripcion= req.body.description;
-					s.imagen = s.imagen;
-					break;
-				}
-			}
-		}
-		else {
-		console.log(req.file);
-		let nombreImagen = req.file.filename;
-		for (let s of eventos){
-			if (id==s.id){
-				s.nombre= req.body.name;
-				s.precio= req.body.price;
-				s.fecha= req.body.date;
-				s.categoria= req.body.category;
-				s.descripcion= req.body.description;
-				s.imagen = nombreImagen;
-				break;
-			}
-		}
-	}
-		fs.writeFileSync(pathProductDb, JSON.stringify(eventos,null,' '));
 
-		res.redirect('/');
+		let idWeb = req.params.id
+		let nombreImagen = req.file.filename
+
+		db.evento.update(
+			{ 
+				nombre:req.body.name,
+				fecha_evento:req.body.date,
+				descripcion:req.body.description,
+
+				// tipo_evento_id:req.body.category,
+				imagen:nombreImagen
+				
+			}, 
+			{
+			where: {id:idWeb} 
+			} 
+			).then((resultados)  => { console.log(resultados) });
+			res.redirect('/')
 
 	},
 
