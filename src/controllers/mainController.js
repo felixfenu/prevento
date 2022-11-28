@@ -3,6 +3,7 @@ const fs = require('fs');
 
 // requerimiento del modelo de base de datos
 const db = require('../database/models');
+const { set } = require('../../app');
 
 // aca exportamos a hashing, esta linea solo va en el donde usamos contraseñas encriptadas
 const bcrypt = require('bcryptjs');
@@ -13,10 +14,6 @@ const { validationResult } = require('express-validator');
 // JSON USUARIOS, GUARDO EN UNA VARIABLE EL JSON DE USUARIOS PARA SUBIR USUARIOS
 const pathUsertDb = path.join(__dirname, '../data/usuarios.json');
 const usuarios = JSON.parse(fs.readFileSync(pathUsertDb, 'utf-8'));
-
-// JSON USUARIOS, GUARDO EN UNA VARIABLE EL JSON DE PRODUCTOS PARA MOSTRAR LOS PRODUCTOS
-const pathProductDb = path.join(__dirname, '../data/eventos.json');
-
 
 
 const controller = {
@@ -41,6 +38,7 @@ index: (req, res) => {
 		});
 },
 
+
 perfil: (req, res) => {
     res.render('accounts/perfil',{usuario: usuarios})
 },
@@ -50,40 +48,25 @@ vistaCrearUsuario: (req, res) => {
     res.render('accounts/registrarse')
 },
 
-// falta conectar con db
+// FUNCIONA CON DB
 accionGuardar: (req, res) => {
-    idNuevo=0;
-
-    for (let s of usuarios){
-        if (idNuevo<s.id){
-            idNuevo=s.id;
-        }
-    }
-
-    idNuevo++;
-
-    // aca lo que hace el req.file.filename es traerme el nombre de la imagen
-    // y guardarl oen una variable, cuando guardamos el producto es el nombre que guarda
-    let nombreImagen = req.file.filename;
-
-    let usuarioNuevo =  {
-        id: idNuevo,
-        nombre: req.body.name ,
-        apellido: req.body.surname,
-        email: req.body.email, 
-        direccion: req.body.adress,
-        pais: req.body.country,
-        // guardo la contraseña con hash
-        contrasena:bcrypt.hashSync(req.body.password,10),
-        // aca guarda la variable asignada arriba
-        imagen: nombreImagen
-    };
-
-    usuarios.push(usuarioNuevo);
-
-    fs.writeFileSync(pathUsertDb, JSON.stringify(usuarios,null,' '));
-
-    res.redirect('/');
+    
+		let nombreImagen = req.file.filename;
+		db.usuario.create(
+			{ 
+				id: req.body.title,
+				nombre: req.body.name ,
+				apellido: req.body.surname, 
+				clave: req.body.password,
+				email: req.body.email,
+				direccion: req.body.adress,
+				imagen: nombreImagen
+			}
+			)
+			.then((resultados)  => { 
+				res.redirect('/');
+			 });
+   
 },
 
 // NO NECESITA DB
