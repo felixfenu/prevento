@@ -21,12 +21,8 @@
 
 // 2 ver como hacer para que la vista de perfil de usuario quede mostrando el perfil ingresado correctamente
 
-// 3 metodo crear un evento del productsController, la viste permite tomar los datos, procesa la creacion y
-// me redirecciona al main, la consola me tira un objeto literal de evento con todos los campos que cargue y 
-// con el id incrmenetal correcto, es decir tenia 3 eventos y ahora tengo 4, pero al ver la base local no lo veo
-// guardado
-
-
+// 3 METODO LOGIN VALIDATOR, METODO CON DB QUE NO FUNCIONA EL BCRYPT, SIEMPRE RETORNA FALSO, revisar
+// mientras se deja el json para ese metodo y se comenta el metodo de base de datos
 
 
 

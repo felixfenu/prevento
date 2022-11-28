@@ -7,6 +7,7 @@ const { set } = require('../../app');
 
 // aca exportamos a hashing, esta linea solo va en el donde usamos contraseñas encriptadas
 const bcrypt = require('bcryptjs');
+
 // importamos express validator
 const { validationResult } = require('express-validator');
 
@@ -75,7 +76,7 @@ login: (req, res) => {
     res.render('accounts/login');
 },
 
-// falta conectar con db
+// falta conectar con db/ ESTA EL METODO HECHO PERO EL BCRYPT DA SIEMPRE FALSE, REVISAR
 loginValidator: (req, res) => {
 
     // cuardo el array de validaciones
@@ -86,6 +87,34 @@ loginValidator: (req, res) => {
     console.log("email y pass del login")
     console.log(emailLogin)
     console.log(passwordLogin)
+
+     // METODO CON DB QUE NO FUNCIONA EL BCRYPT, SIEMPRE RETORNA FALSO
+    // db.usuario.findAll().then((usuario) =>{
+
+    //     let listaUsuario=[];
+
+    //     for (usuarios of usuario){
+    //         listaUsuario.push(usuarios);
+    //     }
+    //     if ( errors.isEmpty() ) {
+    //         for(let i=0;i<listaUsuario.length;i++){
+    //             if(listaUsuario[i].email==emailLogin){
+    //                 console.log(passwordLogin)
+    //                 console.log(listaUsuario[i].clave)
+    //                 console.log(bcrypt.compareSync(passwordLogin,listaUsuario[i].clave))
+    //                 if(bcrypt.compareSync(passwordLogin,listaUsuario[i].clave)){
+    //                     console.log("match")
+    //                     res.render('login existoso');
+    //                                 break;
+    //                 }
+    //                 // renderiga el login de nuevo en caso de
+    //                 else{res.render('accounts/login' )}
+    //             }
+    //         }
+    //         }
+    //         // aca le pasa el array de errores a la vista de login
+    //         else{res.render('accounts/login', {errors: errors.array() } )}
+    // });
 
     // si el array de validaciones esta vacio es que todos los campos estan ok
     if ( errors.isEmpty() ) {
