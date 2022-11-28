@@ -48,16 +48,17 @@ vistaCrearUsuario: (req, res) => {
     res.render('accounts/registrarse')
 },
 
-// FUNCIONA CON DB
+// falta conectar con db
 accionGuardar: (req, res) => {
-    
+
 		let nombreImagen = req.file.filename;
 		db.usuario.create(
 			{ 
 				id: req.body.title,
 				nombre: req.body.name ,
 				apellido: req.body.surname, 
-				clave: req.body.password,
+                // guarda contraseña encriptada
+				clave: bcrypt.hashSync(req.body.password,10),
 				email: req.body.email,
 				direccion: req.body.adress,
 				imagen: nombreImagen
@@ -66,7 +67,7 @@ accionGuardar: (req, res) => {
 			.then((resultados)  => { 
 				res.redirect('/');
 			 });
-   
+
 },
 
 // NO NECESITA DB
