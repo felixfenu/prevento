@@ -90,9 +90,10 @@ const controller = {
 				nombre: req.body.name ,
 				fecha: req.body.date, 
 				length: req.body.length,
-				categoria: req.body.category,
+				tipo_evento_id: req.body.category,
 				descipcion: req.body.description,
-				imagen: nombreImagen
+				imagen: nombreImagen,
+				
 			}
 			)
 			.then((resultados)  => { 
