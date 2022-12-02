@@ -11,7 +11,7 @@ function usuarioData(sequelize, Datatypes){
       nombre: {type: Datatypes.STRING(30)},
       apellido: {type: Datatypes.STRING(30)},
       email: {type: Datatypes.STRING(30)},
-      clave: {type: Datatypes.STRING(10)},
+      clave: {type: Datatypes.STRING(100)},
       admin: {type: Datatypes.BOOLEAN},
     }
     // esto lo dejamos asi por defecto, son congif de sequalize

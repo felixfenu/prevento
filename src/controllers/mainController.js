@@ -98,15 +98,11 @@ loginValidator: (req, res) => {
         }
         if ( errors.isEmpty() ) {
             for(let i=0;i<listaUsuario.length;i++){
-                if(listaUsuario[i].email==emailLogin){
-                    console.log(passwordLogin)
-                    console.log(listaUsuario[i].clave)
-                    console.log(bcrypt.compareSync(passwordLogin,listaUsuario[i].clave))    
+                if(listaUsuario[i].email==emailLogin){   
                     if(bcrypt.compareSync(passwordLogin,listaUsuario[i].clave)){
                         res.render('accounts/loginExitoso');
                                     break;
                     }
-                    // renderiga el login de nuevo en caso de
                     else{res.render('accounts/login' )}
                 }
             }
