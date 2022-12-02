@@ -13,8 +13,8 @@ const { validationResult } = require('express-validator');
 
 
 // JSON USUARIOS, GUARDO EN UNA VARIABLE EL JSON DE USUARIOS PARA SUBIR USUARIOS
-const pathUsertDb = path.join(__dirname, '../data/usuarios.json');
-const usuarios = JSON.parse(fs.readFileSync(pathUsertDb, 'utf-8'));
+// const pathUsertDb = path.join(__dirname, '../data/usuarios.json');
+// const usuarios = JSON.parse(fs.readFileSync(pathUsertDb, 'utf-8'));
 
 
 const controller = {
@@ -89,49 +89,48 @@ loginValidator: (req, res) => {
     console.log(passwordLogin)
 
      // METODO CON DB QUE NO FUNCIONA EL BCRYPT, SIEMPRE RETORNA FALSO
-    // db.usuario.findAll().then((usuario) =>{
+    db.usuario.findAll().then((usuario) =>{
 
-    //     let listaUsuario=[];
+        let listaUsuario=[];
 
-    //     for (usuarios of usuario){
-    //         listaUsuario.push(usuarios);
-    //     }
-    //     if ( errors.isEmpty() ) {
-    //         for(let i=0;i<listaUsuario.length;i++){
-    //             if(listaUsuario[i].email==emailLogin){
-    //                 console.log(passwordLogin)
-    //                 console.log(listaUsuario[i].clave)
-    //                 console.log(bcrypt.compareSync(passwordLogin,listaUsuario[i].clave))
-    //                 if(bcrypt.compareSync(passwordLogin,listaUsuario[i].clave)){
-    //                     console.log("match")
-    //                     res.render('login existoso');
-    //                                 break;
-    //                 }
-    //                 // renderiga el login de nuevo en caso de
-    //                 else{res.render('accounts/login' )}
-    //             }
-    //         }
-    //         }
-    //         // aca le pasa el array de errores a la vista de login
-    //         else{res.render('accounts/login', {errors: errors.array() } )}
-    // });
+        for (usuarios of usuario){
+            listaUsuario.push(usuarios);
+        }
+        if ( errors.isEmpty() ) {
+            for(let i=0;i<listaUsuario.length;i++){
+                if(listaUsuario[i].email==emailLogin){
+                    console.log(passwordLogin)
+                    console.log(listaUsuario[i].clave)
+                    console.log(bcrypt.compareSync(passwordLogin,listaUsuario[i].clave))    
+                    if(bcrypt.compareSync(passwordLogin,listaUsuario[i].clave)){
+                        res.render('accounts/loginExitoso');
+                                    break;
+                    }
+                    // renderiga el login de nuevo en caso de
+                    else{res.render('accounts/login' )}
+                }
+            }
+            }
+            // aca le pasa el array de errores a la vista de login
+            else{res.render('accounts/login', {errors: errors.array() } )}
+    });
 
     // si el array de validaciones esta vacio es que todos los campos estan ok
-    if ( errors.isEmpty() ) {
-        for(let i=0;i<usuarios.length;i++){
-            if(usuarios[i].email==emailLogin){
-                if(bcrypt.compareSync(passwordLogin, usuarios[i].contrasena)){
-                    let usuarioEncontrado=usuarios[i];
-                    res.render('accounts/perfil',{usuarioPerfil: usuarioEncontrado});
-                                break;
-                }
-                // renderiga el login de nuevo en caso de
-                else{res.render('accounts/login' )}
-            }
-        }
-        }
-        // aca le pasa el array de errores a la vista de login
-        else{res.render('accounts/login', {errors: errors.array() } )}
+    // if ( errors.isEmpty() ) {
+    //     for(let i=0;i<usuarios.length;i++){
+    //         if(usuarios[i].email==emailLogin){
+    //             if(bcrypt.compareSync(passwordLogin, usuarios[i].contrasena)){
+    //                 let usuarioEncontrado=usuarios[i];
+    //                 res.render('accounts/perfil',{usuarioPerfil: usuarioEncontrado});
+    //                             break;
+    //             }
+    //             // renderiga el login de nuevo en caso de
+    //             else{res.render('accounts/login' )}
+    //         }
+    //     }
+    //     }
+    //     // aca le pasa el array de errores a la vista de login
+    //     else{res.render('accounts/login', {errors: errors.array() } )}
 },
 }
 module.exports = controller;
