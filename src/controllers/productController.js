@@ -84,11 +84,12 @@ const controller = {
 	accionGuardar: (req, res) => {
 
 		let nombreImagen = req.file.filename;
+		const fecha = new Date(req.body.date);
 		db.evento.create(
 			{ 
 				id: req.body.title,
 				nombre: req.body.name ,
-				fecha: req.body.date, 
+				fecha_evento: fecha, 
 				length: req.body.length,
 				tipo_evento_id: req.body.category,
 				descipcion: req.body.description,
