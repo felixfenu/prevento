@@ -106,16 +106,15 @@ const controller = {
 	accionEditar: (req, res) => {
 
 		let idWeb = req.params.id
-		let nombreImagen = req.file.filename
+		// let nombreImagen = req.file.filename;
 
 		db.evento.update(
 			{ 
 				nombre:req.body.name,
 				fecha_evento:req.body.date,
 				descripcion:req.body.description,
-
 				// tipo_evento_id:req.body.category,
-				imagen:nombreImagen
+				// imagen:nombreImagen
 				
 			}, 
 			{
