@@ -6,7 +6,7 @@ boton.addEventListener("click", function(){
     let nombreP = document.getElementById("pp");
     let n = nombreP.value;
     let precioP = document.getElementById("pp");
-    let p = nombreP.value;
+    let p = precioP.value;
 
     // objeto con el producto nuevo
     let productoNuevo={nombre:n,precio:p}

@@ -50,12 +50,11 @@
               <div class="col-12 col-md-6 text-center">
                 <label for="category" class="form-label">Categoría:</label>
                 <br>
-                <select name="category" id="category" class="form-control-sm" selected="<%=ProductoaEditar.categoria %>">
+                <select  name="category" id="category" class="form-control-sm" selected="<%=ProductoaEditar.categoria %>">
                   <option value="">Elegí</option>
-                  <option value="musica" selected>Musica</option>
-                  <option value="deportes">Deportes</option>
-                  <option value="teatro">Teatro</option>
-                  <option value="infantiles">infantiles</option>
+                  <option value="1">Conciertos</option>
+                  <option value="2">Teatro</option>
+                  <option value="3">Deportes</option>
                 </select>
               </div>
 
@@ -65,12 +64,12 @@
                 <input type="date" id="date" name="date" class="form-control-sm" value="<%=ProductoaEditar.fecha %>">
               </div>
               
-              <div class="col-12 col-md-6 text-center">
+              <!-- <div class="col-12 col-md-6 text-center">
                 <br>
                 <label for="imageProductEdit" class="form-label">Seleccionar Imagen:</label>
-                <!-- INPUT PARA SUBIR LA IMAGEN CON EL MULTER, LE PONEMOS UN NAME -->
-                <input type="file" name="imageProductEdit" class="form-control-sm" accept=".png,.jpg,.jpeg,.svg"/>              
-              </div>
+                INPUT PARA SUBIR LA IMAGEN CON EL MULTER, LE PONEMOS UN NAME
+                <input type="file" name="imageProductEdit" class="form-control-sm"  accept=".png,.jpg,.jpeg,.svg"/>              
+              </div> -->
 
               <div class="col-12 text-center">
                 <br>
