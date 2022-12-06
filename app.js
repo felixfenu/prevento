@@ -53,6 +53,10 @@ app.listen(process.env.PORT || 3000,function(){
     console.log("Servidor subido a la escaloneta")
 })
 
+//session para el login 
+const session = require('express-session');
+app.use(session( {secret: "8743b52063cd84"}));
+
 //RUTAS
 const productRouter = require('./src/routes/productRouter'); // Rutas /products
 const mainRouter = require('./src/routes/mainRouter')
