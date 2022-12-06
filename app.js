@@ -21,10 +21,7 @@
 
 // 2 ver como hacer para que la vista de perfil de usuario quede mostrando el perfil ingresado correctamente
 
-// 3 METODO LOGIN VALIDATOR, METODO CON DB QUE NO FUNCIONA EL BCRYPT, SIEMPRE RETORNA FALSO, revisar
-// mientras se deja el json para ese metodo y se comenta el metodo de base de datos
-
-// 4 en el home cuando por categoria tenes mas de un producto, no se puede ver mas alla del primer producto
+// 3 en el home cuando por categoria tenes mas de un producto, no se puede ver mas alla del primer producto
 // si elegis el segundo o el tercer producto de una categoria se pincha, y si pones el primer producto te aparece
 // la info del segundo producto y no del primero
 
