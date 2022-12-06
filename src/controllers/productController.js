@@ -92,7 +92,7 @@ const controller = {
 				fecha_evento: fecha, 
 				length: req.body.length,
 				tipo_evento_id: req.body.category,
-				descipcion: req.body.description,
+				descripcion: req.body.description,
 				imagen: nombreImagen,
 				
 			}
