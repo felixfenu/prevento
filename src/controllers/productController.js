@@ -27,29 +27,24 @@ const controller = {
 	vistaCrearProd: (req, res) => {
 		res.render('products/crear')
 	},
+
 	// FUNCIONA CON DB
 	// aca le pasamos un evento a la vista descripcion producto
 	vistaDetalleProd: (req, res) => {
 		let idURL = req.params.id;
 		let productoEncontrado;
-
-		db.evento.findAll().then((evento) =>{
-
-			let listaEventos=[];
-
-			for (eventosbd of evento){
-				listaEventos.push(eventosbd);
+		db.evento.findByPk(idURL)
+		.then((resultados)  => { console.log(resultados) 
+			if (resultados){
+				let productoEncontrado = resultados
+				res.render('products/descripcionproducto',{productoDetalle: productoEncontrado});
+			}else{
+				res.render('notfound')
 			}
-			for(let i=0;i<listaEventos.length;i++){
-				if(listaEventos[i].tipo_evento_id==idURL){
-					productoEncontrado=listaEventos[i]
-
-				}
-			}
-
-			res.render('products/descripcionproducto',{productoDetalle: productoEncontrado});
-
 		});
+
+		
+			
 
 	
 	},

@@ -100,9 +100,11 @@ loginValidator: (req, res) => {
             for(let i=0;i<listaUsuario.length;i++){
                 if(listaUsuario[i].email==emailLogin){   
                     if(bcrypt.compareSync(passwordLogin,listaUsuario[i].clave)){
+                        console.log(req.session)
                         res.render('accounts/loginExitoso');
-                                    break;
+                    break;
                     }
+                    
                     else{res.render('accounts/login' )}
                 }
             }

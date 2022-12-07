@@ -55,7 +55,11 @@ app.listen(process.env.PORT || 3000,function(){
 
 //session para el login 
 const session = require('express-session');
-app.use(session( {secret: "8743b52063cd84"}));
+app.use(session( {secret: '8743b'}));
+
+//cookies
+const cookieParser = require('cookie-parser')
+app.use(cookieParser());
 
 //RUTAS
 const productRouter = require('./src/routes/productRouter'); // Rutas /products
