@@ -26,7 +26,7 @@
           <!-- ACA EL FORMULARIO TIENE UN ACTION Y UN METHOD, QUE ME DICE A DONDE ,ANDA LO QUE CREA
           Y POR QUE METODO, EN ESTE CASO LO MANDAMOS A LA RUTA CREATE AL ROUTER
            Y LO MANDAMOS CON EL METODO POST PORQUE ES DATO CRITICO -->
-          <form action="/products/create" method="POST" enctype="multipart/form-data" class="form-control">
+          <form action="/products/create" method="POST" enctype="multipart/form-data" class="form-control" id="formu">
             <div class="row product-detail">
               <div class="col-12 col-md-6 text-center">
                 <!-- CADA NAME DE EL FORMULARIO ES EL NOMBRE DE LA VARIABLE DONDE GUARDA
@@ -84,6 +84,9 @@
     </main>
     <!-- FOOTER -->
     <%- include('../partials/footer') %>
+
+  <!-- importo archvio javascript de validaciones -->
+  <script src="/javascript/crear.js"> </script>
 
   <!-- BOOTSTRAP javascript -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
