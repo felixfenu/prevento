@@ -25,47 +25,47 @@
                   <div class="formu">
                     <!-- aca va solamente /regiter porque son las rutas de la raiz, ojo esto
                     con todas las rutas de la raiz-->
-                <form action="/register" method="POST" enctype="multipart/form-data" class="form-control">
+                <form action="/register" method="POST" enctype="multipart/form-data" class="form-control" id="formu">
                   <div class="row mb-3">
                     <div>
-                      <input type="email" class="form-control formuinput" placeholder="Email" id="inputPassword" name="email">
+                      <input type="email" class="form-control formuinput" placeholder="Email" name="email" id="email">
                     </div>
                   </div>
 
                     <div class="row mb-3">
                         <div>
-                          <input type="password" class="form-control formuinput" placeholder="Contraseña" id="inputPassword" name="password">
+                          <input type="password" class="form-control formuinput" placeholder="Contraseña" id="password" name="password">
                         </div>
                       </div>
 
                       <div class="row mb-3">
                         <div>
-                          <input type="text" class="form-control formuinput" placeholder="Nombre" id="inputName" name="name">
+                          <input type="text" class="form-control formuinput" placeholder="Nombre" id="name" name="name">
                         </div> 
                       </div>
 
                       <div class="row mb-3">
                         <div>
-                          <input type="text" class="form-control formuinput" placeholder="Apellido" id="inputApellido" name="surname">
+                          <input type="text" class="form-control formuinput" placeholder="Apellido" id="surname" name="surname">
                         </div>
                       </div>
 
                       <div class="row mb-3">
                         <div>
-                          <input type="text" class="form-control formuinput" placeholder="País" id="inputPais" name="country">
+                          <input type="text" class="form-control formuinput" placeholder="País" id="country" name="country">
                         </div>
                       </div>
 
                     <div class="row mb-3">
                       <div>
-                        <input type="text" class="form-control formuinput" placeholder="Dirección" id="InputDir" name="adress">
+                        <input type="text" class="form-control formuinput" placeholder="Dirección" id="adress" name="adress">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <!-- div para subir imagen de usuario -->
                       <div>
-                        <input type="file" class="form-control formuinput" name="imageProduct" class="form-control-sm" required accept=".png,.jpg,.jpeg,.svg"/>
+                        <input type="file" class="form-control formuinput" name="imageProduct" class="form-control-sm" required accept=".png,.jpg,.jpeg,.svg" id="imagen"/>
                       </div>
                     </div>
 
@@ -79,6 +79,9 @@
     
 <!-- FOOTER -->
 <%- include('../partials/footer') %>
+
+<!-- importo archvio javascript de validaciones -->
+<script src="/javascript/registrarse.js"> </script>
 
     <!-- BOOTSTRAP javascript -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
