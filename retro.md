@@ -12,4 +12,4 @@ se realizo el modelo y script de la db, se subio a alwaysdata exitosamente, se r
 
 Sprint 7 
 validaciones de back: ya se habian implementado en sprints anteriores el login de usuario y en la vista de crear producto.
-validaciones de front: la vista registrar usuario y crear producto se implementro validaciones de front en los campos que no tenian validacion alguna, cada vista tiene su propio archivo js con la logica de validacion por cada vista, solo se valido que los campos no esten vacios por el momento.
+validaciones de front: la vista registrar usuario, crear producto, editar producto se implementro validaciones de front en los campos que no tenian validacion alguna, cada vista tiene su propio archivo js con la logica de validacion por cada vista, solo se valido que los campos no esten vacios por el momento.
