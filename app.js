@@ -73,7 +73,7 @@ app.use('/cart', cartRouter)
 app.use('/user',userRouter)
 
 app.use((req,res,next)=>{
-    res.status(404).render('notfound')
+    res.status(404).render('notfound',{session: req.session.usuario})
 })
 
 

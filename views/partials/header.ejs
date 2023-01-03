@@ -25,18 +25,22 @@
               </li>
             </ul>
             <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link login" href="/products/create">Publicá tu evento</a>
+              <% if (session) { %> 
+                <li class="nav-item">
+                  <a class="nav-link login" href="/products/create">Publicá tu evento</a>
+                </li>
+                <li class="nav-item">
+                  <a class="" href="/user/profile"> <i class="bi bi-person-circle icono-carrito"></i> </a>
+                </li> 
+              <% } else {%>
+                <li class="nav-item">
+                  <a class="nav-link login" href="/user">Ingresar</a>
+                </li>
+              <li class="nav-item login">
+                <a class="nav-link" href="/user/register">Registrarse</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link login" href="/user">Ingresar</a>
-              </li>
-            <li class="nav-item login">
-              <a class="nav-link" href="/user/register">Registrarse</a>
-            </li>
-            <li class="nav-item">
-              <a class="" href="/user/profile"> <i class="bi bi-person-circle icono-carrito"></i> </a>
-            </li> 
+                <% }%>
+
             <li class="nav-item">
               <a class="" href="/cart"> <i class="bi bi-cart icono-carrito"></i> </a>
             </li> 

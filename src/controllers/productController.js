@@ -19,13 +19,13 @@ const controller = {
 			}
 
             // console.log(listaEventos)
-            res.render('products/home',{evento: listaEventos})
+            res.render('products/home',{evento: listaEventos,session: req.session.usuario})
 
 		});
 	},
 	// no 
 	vistaCrearProd: (req, res) => {
-		res.render('products/crear')
+		res.render('products/crear',{session: req.session.usuario})
 	},
 
 	// FUNCIONA CON DB
@@ -37,37 +37,26 @@ const controller = {
 		.then((resultados)  => { console.log(resultados) 
 			if (resultados){
 				let productoEncontrado = resultados
-				res.render('products/descripcionproducto',{productoDetalle: productoEncontrado});
+				res.render('products/descripcionproducto',{productoDetalle: productoEncontrado,session: req.session.usuario});
 			}else{
-				res.render('notfound')
+				res.render('notfound',{session: req.session.usuario})
 			}
 		});
-
-		
-			
-
 	
 	},
 	// FUNCIONA CON DB 
 	vistaEditarProd: (req, res) => {
-		let id = req.params.id;
+		let idURL = req.params.id;
 		let productoEncontrado;
+		db.evento.findByPk(idURL)
+		.then((resultados)  => { console.log(resultados) 
+			if (resultados){
+				let productoEncontrado = resultados
 
-		db.evento.findAll().then((evento) =>{
-
-			let listaEventos=[];
-
-			for (eventosbd of evento){
-				listaEventos.push(eventosbd);
-			}
-			for(let i=0;i<listaEventos.length;i++){
-				if(listaEventos[i].tipo_evento_id==id){
-					productoEncontrado=listaEventos[i]
-
-				}
-			}
-
-			res.render('products/editar',{ProductoaEditar: productoEncontrado});
+			res.render('products/editar',{ProductoaEditar: productoEncontrado,session: req.session.usuario});
+		}else{
+			res.render('notfound',{session: req.session.usuario})
+		}
 
 		});
 

@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
         cb(null,`${Date.now()}_img_${path.extname(file.originalname)}`);
     },
 })
-
+const authMiddleware = require('../middlewares/auth')
 const uploadFile = multer({storage})
 
 // ************ Controller Require ************
@@ -22,13 +22,13 @@ const productController = require('../controllers/productController');
 router.get('/',productController.vistaListadoProd)
 
 router.get('/create',productController.vistaCrearProd)
-router.post('/create',uploadFile.single('imageProduct'),productController.accionGuardar) //guardar un nuevo producto
+router.post('/create',authMiddleware,uploadFile.single('imageProduct'),productController.accionGuardar) //guardar un nuevo producto
 router.get('/descripcion/:id',productController.vistaDetalleProd)
 
-router.get('/editar/:id',productController.vistaEditarProd)
-router.put('/editar/:id',uploadFile.single('imageProductEdit'),productController.accionEditar)
+router.get('/editar/:id',authMiddleware,productController.vistaEditarProd)
+router.put('/editar/:id',authMiddleware,uploadFile.single('imageProductEdit'),productController.accionEditar)
 
-router.delete('/:id',productController.accionEliminar)
+router.delete('/:id',authMiddleware,productController.accionEliminar)
 
 module.exports = router;
 

@@ -34,19 +34,19 @@ index: (req, res) => {
 			}
 
             console.log(listaEventos)
-            res.render('products/home',{evento: listaEventos})
+            res.render('products/home',{evento: listaEventos, session: req.session.usuario})
 
 		});
 },
 
 
 perfil: (req, res) => {
-    res.render('accounts/perfil',{usuario: usuarios})
+    res.render('accounts/perfil',{usuario: usuarios,session: req.session.usuario})
 },
 
 // NO NECESITA DB
 vistaCrearUsuario: (req, res) => {
-    res.render('accounts/registrarse')
+    res.render('accounts/registrarse',{session: req.session.usuario})
 },
 
 // falta conectar con db
@@ -66,51 +66,49 @@ accionGuardar: (req, res) => {
 			}
 			)
 			.then((resultados)  => { 
-				res.redirect('/');
+				res.render('accounts/registroExitoso',{session: req.session.usuario});
 			 });
 
 },
 
 // NO NECESITA DB
 login: (req, res) => {
-    res.render('accounts/login');
+    res.render('accounts/login',{session: req.session.usuario});
 },
 
-// falta conectar con db/ ESTA EL METODO HECHO PERO EL BCRYPT DA SIEMPRE FALSE, REVISAR
-loginValidator: (req, res) => {
 
+loginValidator: (req, res) => {
     // cuardo el array de validaciones
     let errors = validationResult(req);
     console.log("errors ", errors)
     let emailLogin=req.body.emailLogin
     let passwordLogin=req.body.passwordLogin
-    console.log("email y pass del login")
-    console.log(emailLogin)
-    console.log(passwordLogin)
-
-     // METODO CON DB QUE NO FUNCIONA EL BCRYPT, SIEMPRE RETORNA FALSO
-    db.usuario.findAll().then((usuario) =>{
-
-        let listaUsuario=[];
-
-        for (usuarios of usuario){
-            listaUsuario.push(usuarios);
+    db.usuario.findOne({
+        where: {
+            email : emailLogin
         }
-        if ( errors.isEmpty() ) {
-            for(let i=0;i<listaUsuario.length;i++){
-                if(listaUsuario[i].email==emailLogin){   
-                    if(bcrypt.compareSync(passwordLogin,listaUsuario[i].clave)){
-                        console.log(req.session)
-                        res.render('accounts/loginExitoso');
-                    break;
-                    }
-                    
-                    else{res.render('accounts/login' )}
-                }
+    }).then((usuario) =>{
+        if ( errors.isEmpty()) {
+            let checkPassword = bcrypt.compareSync(passwordLogin,usuario.clave)
+            console.log(usuario.clave)
+            if (checkPassword){
+                req.session.usuario = usuario.email
+                console.log('sesion!!!!!!' + req.session.usuario + req.session)
+                res.redirect('/')
             }
+            else{
+                res.render('accounts/login', {errors: [{
+                    value: '',
+                    msg: 'Usuario y/o contraseña incorrectos',
+                    param: 'emailLogin',
+                    location: 'body'
+                }],session: req.session.usuario })
             }
-            // aca le pasa el array de errores a la vista de login
-            else{res.render('accounts/login', {errors: errors.array() } )}
+            
+        }else{
+            console.log(errors.array())
+            res.render('accounts/login', {errors: errors.array(),session: req.session.usuario } )
+        }
     });
 
 },

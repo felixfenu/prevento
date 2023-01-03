@@ -43,8 +43,4 @@ router.post('/login', validaciones , mainController.loginValidator);
 router.get('/register',mainController.vistaCrearUsuario)
 router.post('/register',uploadFile.single('imageProduct'),mainController.accionGuardar) //guardar un nuevo usuario
 
-// PERFIL DE USUARIO
-router.get('/perfil', mainController.perfil);
-
-
 module.exports = router;
