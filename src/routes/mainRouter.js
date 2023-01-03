@@ -7,6 +7,7 @@ const path = require('path');
 const fs = require('fs');
 //requerimos express validator
 const { body } = require('express-validator');
+const authMiddleware = require('../middlewares/auth')
 
 const storage = multer.diskStorage({
     destination: function (req,file,cb){
@@ -42,5 +43,5 @@ router.post('/login', validaciones , mainController.loginValidator);
 // REGISTRARSE
 router.get('/register',mainController.vistaCrearUsuario)
 router.post('/register',uploadFile.single('imageProduct'),mainController.accionGuardar) //guardar un nuevo usuario
-
+router.get('/admin',authMiddleware, mainController.vistaAdministrador)
 module.exports = router;

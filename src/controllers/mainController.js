@@ -19,98 +19,107 @@ const { validationResult } = require('express-validator');
 
 const controller = {
     // Root - Show all products|
-// FUNCIONA CON DB
-index: (req, res) => {
+    // FUNCIONA CON DB
+    index: (req, res) => {
 
 
-		db.evento.findAll().then((evento) =>{
+        db.evento.findAll().then((evento) => {
 
             console.log(evento)
 
-			let listaEventos=[];
+            let listaEventos = [];
 
-			for (eventos of evento){
-				listaEventos.push(eventos);
-			}
+            for (eventos of evento) {
+                listaEventos.push(eventos);
+            }
 
             console.log(listaEventos)
-            res.render('products/home',{evento: listaEventos, session: req.session.usuario})
+            res.render('products/home', { evento: listaEventos, session: req.session.usuario })
 
-		});
-},
+        });
+    },
 
 
-perfil: (req, res) => {
-    res.render('accounts/perfil',{usuario: usuarios,session: req.session.usuario})
-},
+    perfil: (req, res) => {
+        res.render('accounts/perfil', { usuario: usuarios, session: req.session.usuario })
+    },
 
-// NO NECESITA DB
-vistaCrearUsuario: (req, res) => {
-    res.render('accounts/registrarse',{session: req.session.usuario})
-},
+    // NO NECESITA DB
+    vistaCrearUsuario: (req, res) => {
+        res.render('accounts/registrarse', { session: req.session.usuario })
+    },
 
-// falta conectar con db
-accionGuardar: (req, res) => {
+    // falta conectar con db
+    accionGuardar: (req, res) => {
 
-		let nombreImagen = req.file.filename;
-		db.usuario.create(
-			{ 
-				id: req.body.title,
-				nombre: req.body.name ,
-				apellido: req.body.surname, 
+        let nombreImagen = req.file.filename;
+        db.usuario.create(
+            {
+                id: req.body.title,
+                nombre: req.body.name,
+                apellido: req.body.surname,
                 // guarda contraseña encriptada
-				clave: bcrypt.hashSync(req.body.password,10),
-				email: req.body.email,
-				direccion: req.body.adress,
-				imagen: nombreImagen
-			}
-			)
-			.then((resultados)  => { 
-				res.render('accounts/registroExitoso',{session: req.session.usuario});
-			 });
-
-},
-
-// NO NECESITA DB
-login: (req, res) => {
-    res.render('accounts/login',{session: req.session.usuario});
-},
-
-
-loginValidator: (req, res) => {
-    // cuardo el array de validaciones
-    let errors = validationResult(req);
-    console.log("errors ", errors)
-    let emailLogin=req.body.emailLogin
-    let passwordLogin=req.body.passwordLogin
-    db.usuario.findOne({
-        where: {
-            email : emailLogin
-        }
-    }).then((usuario) =>{
-        if ( errors.isEmpty()) {
-            let checkPassword = bcrypt.compareSync(passwordLogin,usuario.clave)
-            console.log(usuario.clave)
-            if (checkPassword){
-                req.session.usuario = usuario.email
-                console.log('sesion!!!!!!' + req.session.usuario + req.session)
-                res.redirect('/')
+                clave: bcrypt.hashSync(req.body.password, 10),
+                email: req.body.email,
+                direccion: req.body.adress,
+                imagen: nombreImagen
             }
-            else{
-                res.render('accounts/login', {errors: [{
-                    value: '',
-                    msg: 'Usuario y/o contraseña incorrectos',
-                    param: 'emailLogin',
-                    location: 'body'
-                }],session: req.session.usuario })
-            }
-            
-        }else{
-            console.log(errors.array())
-            res.render('accounts/login', {errors: errors.array(),session: req.session.usuario } )
-        }
-    });
+        )
+            .then((resultados) => {
+                res.render('accounts/registroExitoso', { session: req.session.usuario });
+            });
 
-},
+    },
+
+    // NO NECESITA DB
+    login: (req, res) => {
+        res.render('accounts/login', { session: req.session.usuario });
+    },
+
+
+    loginValidator: (req, res) => {
+        // cuardo el array de validaciones
+        let errors = validationResult(req);
+        console.log("errors ", errors)
+        let emailLogin = req.body.emailLogin
+        let passwordLogin = req.body.passwordLogin
+        db.usuario.findOne({
+            where: {
+                email: emailLogin
+            }
+        }).then((usuario) => {
+            if (errors.isEmpty()) {
+                let checkPassword = bcrypt.compareSync(passwordLogin, usuario.clave)
+                console.log(usuario.clave)
+                if (checkPassword) {
+                    req.session.usuario = usuario
+                    if (usuario.admin == 1) { //si el usuario es administrador
+                        res.redirect('/admin')
+                    }
+                    else { //si es un usuario normal
+                        res.redirect('/')
+                    }
+                }
+                else {
+                    res.render('accounts/login', {
+                        errors: [{
+                            value: '',
+                            msg: 'Usuario y/o contraseña incorrectos',
+                            param: 'emailLogin',
+                            location: 'body'
+                        }], session: req.session.usuario
+                    })
+                }
+
+            } else {
+                console.log(errors.array())
+                res.render('accounts/login', { errors: errors.array(), session: req.session.usuario })
+            }
+        });
+
+    },
+    vistaAdministrador: (req, res) => {
+        res.render('admin', { session: req.session.usuario });
+    }
 }
 module.exports = controller;
