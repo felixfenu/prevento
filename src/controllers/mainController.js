@@ -53,6 +53,24 @@ const controller = {
     accionGuardar: (req, res) => {
 
         let nombreImagen = req.file.filename;
+        db.usuario.findOne({
+            where: {
+                email: req.body.email
+            }
+        })
+            .then(resultado=>{
+                if (resultado){
+                    res.render('accounts/registrarse', {
+                        errors: [{
+                            value: '',
+                            msg: 'Usuario existente',
+                            param: 'emailLogin',
+                            location: 'body'
+                        }], session: req.session.usuario
+                    })
+                }
+
+            })
         db.usuario.create(
             {
                 id: req.body.title,

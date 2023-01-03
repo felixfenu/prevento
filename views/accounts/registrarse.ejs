@@ -69,6 +69,11 @@
                         <input type="file" class="form-control formuinput" name="imageProduct" class="form-control-sm" required accept=".png,.jpg,.jpeg,.svg" id="imagen"/>
                       </div>
                     </div>
+                    <% if (locals && locals.errors) { %>
+                      <% if (locals.errors[0].param=="emailLogin") { %>
+                        <h4 style="color:red"> <%= locals.errors[0].msg %>  </h4> 
+                      <% } %>
+                    <% } %>
 
                   </div>
                     <button type="submit" class="btn btn-formu">Enviar</button>    
