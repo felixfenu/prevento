@@ -13,7 +13,17 @@
 <body>
     <%- include('./partials/header') %>
     <h1 class="text-center mt-5 pt-5">Panel de administración</h1>
-    <h4 class="text-center pt-2 pb-5 mb-5"></h4>
+    <div class="container-lg">
+        <% eventos.forEach(evento => { %>
+            <div class="col-10 col-sm-4 col-lg-3">
+                <img class="card-img-top" src="images/uploads/<%= evento.imagen %>">
+            </div>
+            <div class="col-10 col-sm-8 col-lg-6">
+                <h2><%= evento.nombre %></h2>
+            </div>
+            <% }) %>  
+    </div>
+    
     <%- include('./partials/footer') %>
 </body>
 </html>

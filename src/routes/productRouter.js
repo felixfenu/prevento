@@ -30,5 +30,6 @@ router.put('/editar/:id',authMiddleware,uploadFile.single('imageProductEdit'),pr
 
 router.delete('/:id',authMiddleware,productController.accionEliminar)
 
+
 module.exports = router;
 
