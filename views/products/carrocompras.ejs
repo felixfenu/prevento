@@ -14,65 +14,20 @@
   <%- include('../partials/header') %>
 
       <main> 
-        <section id="carrito" class="container-lg pt-1 mt-1">
-            <div class="col-11 col-md-9 col-sm-9 container-lg"> 
-                <article class="carrito-item rounded row align-items-center mb-2 shadow bg-white">
-                    <div class="col-12 col-sm-7 col-lg-6 p-2">
-                        <img src="/images/evento-1.png" alt="evento" class="container p-0 rounded">
-                    </div>
-                    <div class="col-12 col-sm-5 col-lg-6 p-2 text-center">
-                        <div class="row p-2">
-                            <h4>NICKI NICOLE | BIZARRAP</h4>
-                            <p> Primera tanda </p>
-                        </div>
-                        
-                        <div class="row p-2 justify-content-center">
-                            <button type="button" class="col-1 btn btn-light">-</button>
-                            <input type="number" class="col-2">
-                            <button type="button" class="col-1 btn btn-light">+</button>
-                        </div>
-                        <div class="row p-2 justify-content-end">
-                            <p>
-                                Subtotal: $7800
-                            </p>
-                        </div>
-                        
-                    </div>
-                </article>
-                <article class="carrito-item rounded row align-items-center shadow bg-white">
-                    <div class="col-12 col-sm-7 col-lg-6 p-2">
-                        <img src="/images/evento-2.jpeg" alt="evento" class="container p-0 rounded">
-                    </div>
-                    <div class="col-12 col-sm-5 col-lg-6 p-2 text-center">
-                        <div class="row p-2">
-                            <h4> ROMBAI </h4>
-                            <p> Entrada general </p>
-                        </div>
-                        
-                        <div class="row p-2 justify-content-center">
-                            <button type="button" class="col-1 btn btn-light">-</button>
-                            <input type="number" class="col-2">
-                            <button type="button" class="col-1 btn btn-light">+</button>
-                        </div>
-                        <div class="row p-2 justify-content-end">
-                            <p>
-                                Subtotal: $3500
-                            </p>
-                        </div>
-                        
-                    </div>
-                </article>
+        <section class="container-lg pt-1 mt-1">
+            <div id="carrito" class="col-11 col-md-9 col-sm-9 container-lg"> 
+            </div> 
                 <article class="justify-content-center row p-4">
                     <!-- <div class=""> -->
                         
                     <!-- </div> -->
                     <form action="comprar" method="post" class="justify-content-center row p-4">
-                        <h5 class="col-12 col-sm-5 text-center mb-0 mt-2 pb-0"> Total: $11300</h5>
+                        <h5 class="col-12 col-sm-5 text-center mb-0 mt-2 pb-0" id="valorTotal"></h5>
                         <button class="btn btn-outline-success btn-buscar col-10 col-sm-2 mt-sm-0 mt-2" type="submit">Pagar</button>
                     </form>
                     
                 </article>
-        </div>
+
         </section>
         
 

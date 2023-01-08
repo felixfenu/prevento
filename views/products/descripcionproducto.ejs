@@ -58,39 +58,43 @@
             </div>
           </div>
           <br>
-          <% if (session && (entrada.length == 0 && ((productoDetalle.admin_id==session.id) || (session.admin)))) { %>
+          <% if (session && (entrada.length==0 && ((productoDetalle.admin_id==session.id) || (session.admin)))) { %>
             <div class="col-12 p-3">
               ¡Aún no has cargado entradas para este evento!
             </div>
-            
+
             <% } %>
-            <% entrada.forEach(entrada=> { %>
-              <div class="row justify-content-center m-0 p-2">
-                <div class="col-12">
-                  <div class="form-check" style="margin-left: 5px;">
-                    <input class="form-check-input" type="checkbox" name="entrada[]" value="<%=entrada.id %> "
-                      id="flexCheckDefault<%=entrada.id %>" style="float: none;">
-                    <label class="form-check-label" for="flexCheckDefault<%=entrada.id %>">
-                      <%= entrada.sector.nombre %> $ <div class="d-inline"> <%= entrada.precio %> </div>
-                    </label>
+              <% entrada.forEach(entrada=> { %>
+                <div class="row justify-content-center m-0 p-2">
+                  <div class="col-12">
+                    <div class="form-check" style="margin-left: 5px;">
+                      <input class="form-check-input" type="checkbox" name="entrada[]"
+                        value="<%= entrada.sector.nombre %> $<%= entrada.precio %> $<%=entrada.id %>"
+                        id="<%=entrada.id %>" style="float: none;">
+                      <label class="form-check-label" for="<%=entrada.id %>">
+                        <%= entrada.sector.nombre %> $ <div class="d-inline">
+                            <%= entrada.precio %>
+                          </div>
+                      </label>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <% }) %>
+                <% }) %>
 
-                <button id="carrito" type="button" class="btn btn-warning add-to-cart p-1 px-2"
-                  style="font-size: 0.9rem;">Agregar al carrito</button>
-                <% if (session && ((productoDetalle.admin_id==session.id)|| (session.admin))) { %>
-                  <a href="/products/editar/<%=productoDetalle.id%>"
-                    class="action-button edit btn btn-warning text-black p-1 px-2" style="font-size: 0.9rem;"">
+                  <button id="carrito" type="button" class="btn btn-warning add-to-cart p-1 px-2"
+                    style="font-size: 0.9rem;">Agregar al carrito</button>
+                  <% if (session && ((productoDetalle.admin_id==session.id)|| (session.admin))) { %>
+                    <a href="/products/editar/<%=productoDetalle.id%>"
+                      class="action-button edit btn btn-warning text-black p-1 px-2" style="font-size: 0.9rem;"">
               Editar producto</a>
             <form action=" /products/<%=productoDetalle.id%>?_method=DELETE" method="POST" style="display:
-                    inline-flex;font-size: 0.9rem;"
-                    onsubmit="return confirm('Esta seguro que desea eliminarlo?');">
-                    <button type="submit" class="btn btn-outline-success btn-buscar mb-4 p-1 px-2"
-                      style="font-size: 0.9rem;"><i class="bi bi-trash"></i></button>
-                    <% } %>
-                      </form>
+                      inline-flex;font-size: 0.9rem;"
+                      onsubmit="return confirm('Esta seguro que desea eliminarlo?');">
+                      <button type="submit" class="btn btn-outline-success btn-buscar mb-4 p-1 px-2"
+                        style="font-size: 0.9rem;"><i class="bi bi-trash"></i></button>
+                      <% } %>
+                        </form>
+                        
 
         </div>
       </div>
@@ -110,21 +114,37 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
       <script>
-
         let boton = document.getElementById("carrito");
-
         boton.addEventListener("click", function () {
-          //let nombreEvento = document.getElementById("nombreEvento").innerHTML;
-          var entradas = document.querySelectorAll('.form-check-input:checked');
-          // let entrada = ;
-          // let precio = ;
-          // let imagen = ;
-          //let id = <%=productoDetalle.id%>
-          //console.log(entradas)
-          
-          for (let i = 0; i < entradas.length; i++) {
-            alert(entradas[i].innerHTML)
+          var checkBoxEntradas = document.querySelectorAll('.form-check-input:checked');
+          let entradas = [];
+
+          for (let i = 0; i < checkBoxEntradas.length; i++) {
+            let valorSeleccion = checkBoxEntradas[i].value; //Ej VIP $10500
+            let sector = valorSeleccion.split('$')[0]; // Ej VIP
+            let precio = valorSeleccion.split('$')[1]; // Ej 10500
+            let id = valorSeleccion.split('$')[2];
+            entradas.push({
+              id: id,
+              sector: sector,
+              precio: precio,
+              cantidad: 1
+            })
+          };
+
+          let compra = {
+            id: <%=productoDetalle.id %>,
+            nombre: document.querySelector('#nombreEvento h1').innerText,
+            imagen: document.querySelector('.imagen').getAttribute('src'),
+            entradas: entradas
+          };
+          let carritoA = [];
+
+          if (localStorage.getItem('carrito') != null) { // si el carrito no esta vacio
+            carritoA = (JSON.parse(localStorage.getItem('carrito'))); 
           }
+          carritoA.push(compra); //agrego la nueva compra 
+          localStorage.setItem('carrito', JSON.stringify(carritoA));
         })
 
       </script>
