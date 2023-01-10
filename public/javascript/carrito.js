@@ -53,6 +53,10 @@ window.onload = function () {
     }
     actualizarTotalCarrito();
   }
+  else {
+    document.querySelector('article form').innerHTML = ""
+    carritoDiv.innerHTML = `<h3 class='text-center mt-2 pt-2'>Aún no tienes entradas en tu carrito</h3>`
+  }
 
   let botonesRestar = document.querySelectorAll(".boton-restar");
   let inputsCantidad = document.querySelectorAll(".input-cantidad");

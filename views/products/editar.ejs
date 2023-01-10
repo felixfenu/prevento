@@ -12,84 +12,99 @@
     integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
   <link href="../../css/crear.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="../../css/nav-footer.css">
+  <link rel="stylesheet" href="../../css/editar.css">
   <link rel="icon" href="/images/prevento-logo.png">
-  <title>Editar evento</title>
+  <title>Editar evento <%=evento.nombre %>
+  </title>
 </head>
 
 <body>
   <%- include('../partials/header') %>
-
     <main>
-      <div class="container products-wrapper ">
+      <div class="container-md text-center caja rounded shadow">
         <div class="row">
-          <div class="col-12 mt-2">
-            <h2 class="products-title text-center ">Formulario de edición de producto: <i>
-                <%=ProductoaEditar.nombre %>
-              </i></h2>
+          <!-- imagen producto -->
+          <div class="col-sm-5 col-12" style="padding: 0;">
+
+            <img src="/images/uploads/<%=evento.imagen%>" alt="imagen_evento" class="imagen" style="
+            border-top-left-radius: var(--bs-border-radius);
+            border-bottom-left-radius: var(--bs-border-radius);">
           </div>
-        </div>
-        <div class="col-12">
-          <!-- ACA EL FORMULARIO TIENE UN ACTION Y UN METHOD, QUE ME DICE A DONDE ,ANDA LO QUE CREA
-          Y POR QUE METODO, EN ESTE CASO LO MANDAMOS A LA RUTA CREATE AL ROUTER
-           Y LO MANDAMOS CON EL METODO POST PORQUE ES DATO CRITICO -->
-          <form action="/products/editar/<%= ProductoaEditar.id%>?_method=PUT" method="POST"
-            enctype="multipart/form-data" class="form-control" id="formu">
-            <div class="row product-detail">
-              <div class="col-12 col-md-6 text-center">
-                <!-- CADA NAME DE EL FORMULARIO ES EL NOMBRE DE LA VARIABLE DONDE GUARDA
-                LOS DATOS DE LOS PRODUCTOS NUEVOS, VER QUE COINCIDEN CON LOS OBJETOS LITERALES
-                DEÑ JSON, AL INGRESAR UN PRODUCTO POR ESTA VISTA, LO GUARDA EN UN OBJETO Y LO ESCRIBE
-                EN EL JSON -->
-                <label for="name" class="form-label">Nombre del evento:</label>
-                <br>
-                <input value="<%=ProductoaEditar.nombre%>" type="text" id="name" name="name"
-                  placeholder="Ej: Creamfields " class="form-control-sm">
-              </div>
-              <div class="col-12 col-md-6 text-center">
-                <label for="price" class="form-label text-center">Precio:</label>
-                <br>
-                <input value="<%=ProductoaEditar.precio %>" type="number" id="price" name="price" placeholder="Ej: 5678"
-                  class="form-control-sm">
-              </div>
-              <div class="col-12 col-md-6 text-center">
-                <label for="description" class="form-label " required>Descipción:</label>
-                <br>
-                <textarea name="description" id="description"
-                  class="form-control-sm"><%=ProductoaEditar.descripcion %></textarea>
-              </div>
-              <div class="col-12 col-md-6 text-center">
-                <label for="category" class="form-label">Categoría:</label>
-                <br>
-                <select name="category" id="category" class="form-control-sm"
-                  selected="<%=ProductoaEditar.categoria %>">
-                  <option value="">Elegí</option>
-                  <option value="1">Conciertos</option>
-                  <option value="2">Teatro</option>
-                  <option value="3">Deportes</option>
-                </select>
+
+          <div class="col-sm-7 p-0 col-12">
+            <!-- COLUMNA FORMULARIO -->
+            <div id="nombreEvento">
+              <h1 class="p-1 pt-2">
+                <%= evento.nombre %> 
+              </h1>
+            </div>
+            <form action="/products/editar/<%= evento.id%>?_method=PUT" method="POST"
+              enctype="multipart/form-data" class="form-control">
+            <div class="row justify-content-center">
+              <div class="col-12 col-sm-5 p-2"">
+                <label for="name">Evento</label>
+                  <input type="text" name="name" id="name" class="form-control-sm" value="<%= evento.nombre %>">
+                
               </div>
 
-              <div class="col-12 col-md-6 text-center">
-                <label for="category" class="form-label">Fecha:</label>
-                <br>
-                <input type="date" id="date" name="date" class="form-control-sm" value="<%=ProductoaEditar.fecha %>">
-              </div>
-
-              <!-- <div class="col-12 col-md-6 text-center">
-                <br>
-                <label for="imageProductEdit" class="form-label">Seleccionar Imagen:</label>
-                INPUT PARA SUBIR LA IMAGEN CON EL MULTER, LE PONEMOS UN NAME
-                <input type="file" name="imageProductEdit" class="form-control-sm"  accept=".png,.jpg,.jpeg,.svg"/>              
-              </div> -->
-
-              <div class="col-12 text-center">
-                <br>
-                <button type="submit" class="action-button edit btn btn-warning text-black mb-4">Guardar evento</button>
+              <div class="col-12 col-sm-5 p-2"">
+                <label for="date">
+                  <i class="bi bi-calendar4-event p-1"></i></label>
+                  <input type="date" id="date" name="date" class="form-control-sm" value="<%= evento.fecha_evento %>">
+                
               </div>
             </div>
-          </form>
+            <div class="row justify-content-center">
+              <div class="col-12 col-sm-5 p-2">
+                <label for="direccion">
+                  <i class="bi bi-geo-alt-fill pt-1 pr-1"></i></label>
+                  <input style="display:inline" type="text" name="direccion" id="direccion" value="<%= evento.direccion %>">
+                
+              </div>
+              <div class="col-12 col-sm-5 p-2">
+                <label for="category">Categoría</label>
+                  <select name="category" id="category" class="form-control-sm">
+                    <option value="<%=evento.tipo_evento.id %>" selected><%=evento.tipo_evento.nombre %></option>
+                    <option value="1">Conciertos</option>
+                    <option value="2">Deportes</option>
+                    <option value="3">Teatro</option>
+                  </select>
+                
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-12 col-sm-12">
+                <label for="description">Descripción </label> 
+                <textarea name="description" id="description" class="form-control-sm" style="width: 65%;height: 70px;"><%= evento.descripcion%></textarea>
+              </div>
+            </div>
+            <% entrada.forEach(entrada => { %>
+              <div class="row justify-content-center">
+                <div class="col-5 divEntradas">
+                  <label for="entrada"> 
+                    <i class="bi bi-ticket-fill"></i></label>
+                    <input type="hidden" id="entradaId" name="entrada[id]" value="<%= entrada.id %>">
+                    <input type="hidden" id="sectorId" name="entrada[sectorId]" value="<%= entrada.sector.id %>">
+                    <input type="text" id="entrada" name="entrada[sectorNombre]" value="<%= entrada.sector.nombre %>" class="text-center">
+                  
+                </div>
+                <div class="col-5 divEntradas">
+                  <label for="precio">
+                    $</label>
+                    <input type="number" id="precio" name="entrada[precio]" value="<%= entrada.precio %>" class="text-center">
+                  
+                </div>
+              </div>
+            <% }) %>
+            <div class="p-4 px-2">
+              <button id="carrito" type="submit" class="btn btn-warning add-to-cart p-1 px-3"
+                style="font-size: 0.9rem;">Editar</button>
+            </div>
+            </form>
+          </div>
         </div>
-
+      </div>
+      </div>
       </div>
 
     </main>

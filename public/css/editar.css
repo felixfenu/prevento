@@ -1,0 +1,15 @@
+input {
+    height: 33px;
+    width: 170px;
+}
+select {
+    height: 33px;
+    width: 170px;
+}
+label{
+    width: 100%;
+}
+
+.divEntradas input {
+    width: 140px;
+}

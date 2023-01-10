@@ -105,6 +105,20 @@ header {
     text-align: right;
 }
 
+#nombreEvento {
+    font-weight: 700;
+    letter-spacing: 2px;
+    background-color: #152534;
+    color: white;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Comfortaa', sans-serif;
+}
+.imagen {
+    width: 100%;
+}
+
 @media only screen and (max-width: 600px) {
     #buscar {
         width: 75%;

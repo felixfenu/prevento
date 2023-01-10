@@ -45,10 +45,8 @@ const controller = {
         },
       })
       .then((evento) => {
-        console.log(evento);
         if (evento) {
           let productoEncontrado = evento;
-
           db.entrada
             .findAll({
               where: {
@@ -74,23 +72,30 @@ const controller = {
   // FUNCIONA CON DB
   vistaEditarProd: (req, res) => {
     let idURL = req.params.id;
-    let productoEncontrado;
+    let evento;
     db.evento
       .findOne({
         where: {
           id: idURL,
         },
-        include: [{ association: entrada }],
+        include: [{ association: "tipo_evento" }],
       })
-      .then((resultados) => {
-        console.log(resultados);
-        if (resultados) {
-          let productoEncontrado = resultados;
-
-          res.render("products/editar", {
-            ProductoaEditar: productoEncontrado,
-            session: req.session.usuario,
-          });
+      .then((evento) => {
+        if (evento) {
+          db.entrada
+            .findAll({
+              where: {
+                evento_id: evento.id,
+              },
+              include: [{ association: "sector" }],
+            })
+            .then((entrada) => {
+              res.render("products/editar", {
+                evento: evento,
+                entrada: entrada,
+                session: req.session.usuario,
+              });
+            });
         } else {
           res.render("notfound", { session: req.session.usuario });
         }
@@ -131,27 +136,42 @@ const controller = {
 
   // FUNCIONA CON DB
   accionEditar: (req, res) => {
-    let idWeb = req.params.id;
-    // let nombreImagen = req.file.filename;
+    console.log(req.body);
+    let id = req.params.id;
+    let nombre = req.body.name;
+    let fecha = req.body.date;
+    let direccion = req.body.direccion;
+    let categoria = req.body.category;
+    let descripcion = req.body.descripcion;
+    let entradas = req.body.entrada;
+
     db.evento
       .update(
         {
-          nombre: req.body.name,
-          fecha_evento: req.body.date,
-          descripcion: req.body.description,
-          // tipo_evento_id:req.body.category,
-          // imagen:nombreImagen
+          nombre: nombre,
+          fecha_creacion: fecha,
+          direccion: direccion,
+          tipo_evento_id: categoria,
+          descripcion: descripcion,
         },
         {
-          where: { id: idWeb },
+          where: { id: id },
         }
       )
-      .then((resultados) => {
-        console.log(resultados);
+      .then((result) => {
+      })
+      .catch((error) => {
+        console.log("Ha ocurrido un error" + error);
       });
-    res.redirect("/").catch((error) => {
-      console.log("Ha ocurrido un error" + error);
-    });
+      async function updateEmployee (entradaPrecio,entradaid){
+   
+        await db.entrada.update({precio: entradaPrecio},{where: {id: entradaid}})
+     }
+     async () => {
+        for (const entrada of entradas) {
+          const p =  await updateEmployee(entrada.precio,entrada.id).then(() => res.json({ message: 'Employee created.' }));
+        }
+     }
   },
 
   // FUNCIONA CON DB
