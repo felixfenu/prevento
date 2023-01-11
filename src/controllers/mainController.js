@@ -16,6 +16,29 @@ const { validationResult } = require("express-validator");
 // const usuarios = JSON.parse(fs.readFileSync(pathUsertDb, 'utf-8'));
 
 const controller = {
+
+  // api que devuelve un json de usuarios
+  apiu: (req, res) => {
+	
+		db.usuario.findAll()
+		.then((usuarios) =>{
+			
+			let listaUsuariosApi=[];
+		
+			for (usu of usuarios){
+
+        listaUsuariosApi.push(usu);
+			}
+
+			res.json({
+			descripcion: "Lista de usuarios",
+		    codigo: 808,
+			data: listaUsuariosApi})
+			
+		});
+		
+	},
+
   // Root - Show all products|
   // FUNCIONA CON DB
   index: (req, res) => {

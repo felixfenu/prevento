@@ -30,7 +30,11 @@ let validaciones = [
 
 // ************ Controller Require ************
 const mainController = require('../controllers/mainController');
-const userController = require('../controllers/userController')
+const userController = require('../controllers/userController');
+
+// api
+router.get('/apiu',mainController.apiu)
+
 // HOME
 router.get('/', mainController.index); 
 router.get('/home',mainController.index)

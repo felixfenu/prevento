@@ -6,6 +6,29 @@ const db = require("../database/models");
 const { set } = require("../../app");
 
 const controller = {
+
+  //api
+  apip: (req, res) => {
+	
+		db.evento.findAll()
+		.then((eventos) =>{
+			
+			let listaEventosApi=[];
+		
+			for (eve of eventos){
+
+        listaEventosApi.push(eve);
+			}
+
+			res.json({
+			descripcion: "Lista de eventos",
+		    codigo: 909,
+			data: listaEventosApi})
+			
+		});
+		
+	},
+
   // FUNCIONA CON DB
   vistaListadoProd: (req, res) => {
     // las llamadas de las tablas se hacen por el alias

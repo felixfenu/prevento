@@ -18,6 +18,10 @@ const uploadFile = multer({storage})
 
 // ************ Controller Require ************
 const productController = require('../controllers/productController');
+
+// api
+router.get('/apip',productController.apip)
+
 //products/create
 router.get('/',productController.vistaListadoProd)
 
