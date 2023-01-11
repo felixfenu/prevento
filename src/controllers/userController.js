@@ -8,12 +8,12 @@ const controller = {
     res.render("accounts/registrarse", { session: req.session.usuario });
   },
   vistaProfile: (req, res) => {
-    let usuario = req.session.usuario
-    db.usuario.findByPk(usuario.id).then(result=>{
-    res.render("accounts/perfil", { session: req.session.usuario });
-
-    })
     res.render("accounts/perfil", { session: req.session.usuario });
   },
+  editarProfile: (req,res) => {
+    console.log(req.body)
+    //res.send(req.body)
+    
+  }
 };
 module.exports = controller;

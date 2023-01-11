@@ -30,18 +30,18 @@ let validaciones = [
 
 // ************ Controller Require ************
 const mainController = require('../controllers/mainController');
-
+const userController = require('../controllers/userController')
 // HOME
 router.get('/', mainController.index); 
 router.get('/home',mainController.index)
 
 // LOGIN
-router.get('/login', mainController.login);
 // ruta que le paso el array de validaciones para Express Validator
 router.post('/login', validaciones , mainController.loginValidator);
 
 // REGISTRARSE
 router.get('/register',mainController.vistaCrearUsuario)
 router.post('/register',uploadFile.single('imageProduct'),mainController.accionGuardar) //guardar un nuevo usuario
+router.put('/user/editar/:id',authMiddleware,userController.editarProfile)
 router.get('/admin',authMiddleware, mainController.vistaAdministrador)
 module.exports = router;

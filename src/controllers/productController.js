@@ -120,6 +120,7 @@ const controller = {
         descripcion: req.body.description,
         imagen: nombreImagen,
         admin_id: req.session.usuario.id,
+        direccion: req.body.direccion
       })
       .then((resultados) => {
         console.log(resultados.id);
@@ -139,11 +140,25 @@ const controller = {
     console.log(req.body);
     let id = req.params.id;
     let nombre = req.body.name;
-    let fecha = req.body.date;
+    let fecha = new Date(req.body.date);
     let direccion = req.body.direccion;
     let categoria = req.body.category;
     let descripcion = req.body.descripcion;
-    let entradas = req.body.entrada;
+    let tickets = req.body.entrada;
+
+    let arregloEntradas = [];
+
+    if (tickets){
+      for (i = 0; i < tickets.id.length; i++) {
+        arregloEntradas.push({
+          id: tickets.id[i],
+          sector: tickets.sectorNombre[i],
+          sectorId: tickets.sectorId[i],
+          precio: tickets.precio[i],
+        });
+      }
+      updateEntradas();
+    }
 
     db.evento
       .update(
@@ -158,20 +173,48 @@ const controller = {
           where: { id: id },
         }
       )
-      .then((result) => {
-      })
+      .then((result) => {})
       .catch((error) => {
         console.log("Ha ocurrido un error" + error);
       });
-      async function updateEmployee (entradaPrecio,entradaid){
-   
-        await db.entrada.update({precio: entradaPrecio},{where: {id: entradaid}})
-     }
-     async () => {
-        for (const entrada of entradas) {
-          const p =  await updateEmployee(entrada.precio,entrada.id).then(() => res.json({ message: 'Employee created.' }));
-        }
-     }
+    
+    function updateEntradas () {
+      for (const ticket of arregloEntradas) {
+        db.entrada
+          .update({ precio: ticket.precio }, { where: { id: ticket.id } })
+          .catch((error) => {
+            console.log("Ha ocurrido un error" + error);
+          });
+        db.sector
+          .update({nombre: ticket.sector},{where:{id: ticket.sectorId}})
+          .catch((error) => {
+            console.log("Ha ocurrido un error" + error);
+          });
+        console.log("Update " + ticket.id + " " + ticket.precio);
+      }
+    };
+
+    let entradaNueva = req.body.entradaNueva;
+
+    if (entradaNueva.sectorNombre.length >=3 && entradaNueva.precio){
+      db.sector
+        .create({
+          nombre: entradaNueva.sectorNombre
+        }).then(resultado=>{
+          db.entrada
+          .create({
+            evento_id: id,
+            sector_id: resultado.id,
+            precio: entradaNueva.precio
+          })
+        })
+        .catch((error) => {
+          console.log("Ha ocurrido un error" + error);
+        });
+    }
+
+    res.redirect('/products/editar/'+id)
+    
   },
 
   // FUNCIONA CON DB

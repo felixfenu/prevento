@@ -8,5 +8,6 @@ router.get('/',userController.vistaLogin)
 router.get('/login',userController.vistaLogin)
 router.get('/register',userController.vistaRegister)
 router.get('/profile',authMiddleware,userController.vistaProfile)
+router.put('/editar/:id',authMiddleware,userController.editarProfile)
 
 module.exports = router;

@@ -33,7 +33,6 @@ label{
 }
 
 .formuinput:focus {
-    color: rgb(170, 170, 170);
     text-align: center; 
     border-color:#f7c143;
 }
