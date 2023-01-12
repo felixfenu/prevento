@@ -10,8 +10,8 @@ router.get('/users/:id',apiController.usuarioPorId)
 
 router.get('/products',apiController.productos)
 router.get('/products/categories',apiController.productosPorCategoria)
+router.get('/products/lastCreated',apiController.lastCreatedProduct)
 router.get('/products/:id',apiController.productosrPorId)
 
-// router.get('/products/lastCreated',apiController.lastCreatedProduct)
 
 module.exports = router;

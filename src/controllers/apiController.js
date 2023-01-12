@@ -88,6 +88,19 @@ const controller = {
         res.send("Ha ocurrido un error intentelo de nuevo mas tarde"+error);
       });
   },
-  lastCreatedProduct: (req, res) => {},
+  lastCreatedProduct: (req, res) => {
+    db.evento
+      .findOne({
+        order: [["id", "DESC"]],
+        include: [{ association: "tipo_evento" }, { association: "entrada" }],
+      })
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((error) => {
+        res.send("Ha ocurrido un error intentelo de nuevo mas tarde");
+      });
+  },
 };
+
 module.exports = controller;
