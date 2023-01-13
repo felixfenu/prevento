@@ -6,44 +6,14 @@ const db = require("../database/models");
 const { set } = require("../../app");
 
 const controller = {
-
-  //api
-  apip: (req, res) => {
-	
-		db.evento.findAll()
-		.then((eventos) =>{
-			
-			let listaEventosApi=[];
-		
-			for (eve of eventos){
-
-        listaEventosApi.push(eve);
-			}
-
-			res.json({
-			descripcion: "Lista de eventos",
-		    codigo: 909,
-			data: listaEventosApi})
-			
-		});
-		
-	},
-
   // FUNCIONA CON DB
   vistaListadoProd: (req, res) => {
     // las llamadas de las tablas se hacen por el alias
     db.evento
-      .findAll()
+      .findAll({where:{aprobado: true}})
       .then((evento) => {
-        let listaEventos = [];
-
-        for (eventosbd of evento) {
-          listaEventos.push(eventosbd);
-        }
-
-        // console.log(listaEventos)
         res.render("products/home", {
-          evento: listaEventos,
+          evento: evento,
           session: req.session.usuario,
         });
       })
@@ -143,7 +113,7 @@ const controller = {
         descripcion: req.body.description,
         imagen: nombreImagen,
         admin_id: req.session.usuario.id,
-        direccion: req.body.direccion
+        direccion: req.body.direccion,
       })
       .then((resultados) => {
         console.log(resultados.id);
@@ -159,7 +129,7 @@ const controller = {
   },
 
   // FUNCIONA CON DB
-  accionEditar: (req, res) => {
+  accionEditar: async (req, res) => {
     console.log(req.body);
     let id = req.params.id;
     let nombre = req.body.name;
@@ -171,7 +141,7 @@ const controller = {
 
     let arregloEntradas = [];
 
-    if (tickets){
+    if (tickets) {
       for (i = 0; i < tickets.id.length; i++) {
         arregloEntradas.push({
           id: tickets.id[i],
@@ -183,61 +153,49 @@ const controller = {
       updateEntradas();
     }
 
-    db.evento
-      .update(
-        {
-          nombre: nombre,
-          fecha_creacion: fecha,
-          direccion: direccion,
-          tipo_evento_id: categoria,
-          descripcion: descripcion,
-        },
-        {
-          where: { id: id },
-        }
-      )
-      .then((result) => {})
-      .catch((error) => {
-        console.log("Ha ocurrido un error" + error);
-      });
-    
-    function updateEntradas () {
+    await db.evento.update(
+      {
+        nombre: nombre,
+        fecha_creacion: fecha,
+        direccion: direccion,
+        tipo_evento_id: categoria,
+        descripcion: descripcion,
+      },
+      {
+        where: { id: id },
+      }
+    );
+
+    async function updateEntradas() {
       for (const ticket of arregloEntradas) {
-        db.entrada
-          .update({ precio: ticket.precio }, { where: { id: ticket.id } })
-          .catch((error) => {
-            console.log("Ha ocurrido un error" + error);
-          });
-        db.sector
-          .update({nombre: ticket.sector},{where:{id: ticket.sectorId}})
-          .catch((error) => {
-            console.log("Ha ocurrido un error" + error);
-          });
+        await db.entrada.update(
+          { precio: ticket.precio },
+          { where: { id: ticket.id } }
+        );
+
+        await db.sector.update(
+          { nombre: ticket.sector },
+          { where: { id: ticket.sectorId } }
+        );
+
         console.log("Update " + ticket.id + " " + ticket.precio);
       }
-    };
+    }
 
     let entradaNueva = req.body.entradaNueva;
 
-    if (entradaNueva.sectorNombre.length >=3 && entradaNueva.precio){
-      db.sector
-        .create({
-          nombre: entradaNueva.sectorNombre
-        }).then(resultado=>{
-          db.entrada
-          .create({
-            evento_id: id,
-            sector_id: resultado.id,
-            precio: entradaNueva.precio
-          })
-        })
-        .catch((error) => {
-          console.log("Ha ocurrido un error" + error);
-        });
+    if (entradaNueva.sectorNombre.length >= 3 && entradaNueva.precio) {
+      const resultado = await db.sector.create({
+        nombre: entradaNueva.sectorNombre,
+      });
+      await db.entrada.create({
+        evento_id: id,
+        sector_id: resultado.id,
+        precio: entradaNueva.precio,
+      });
     }
 
-    res.redirect('/products/editar/'+id)
-    
+    res.redirect("/products/editar/" + id);
   },
 
   // FUNCIONA CON DB
@@ -257,5 +215,21 @@ const controller = {
 
     res.redirect("/");
   },
+  aprobarEvento: (req, res) => {
+    cambiarEstadoEvento(req.body.id,true)
+    res.redirect('/admin')
+  },
+  rechazarEvento: (req, res) => {
+    cambiarEstadoEvento(req.body.id,false)
+    res.redirect('/admin')
+  },
 };
+
+async function cambiarEstadoEvento(id, estado) {
+  try {
+    await db.evento.update({ aprobado: estado }, { where: { id: id } });
+  } catch (error) {
+    console.log(error)
+  }
+}
 module.exports = controller;

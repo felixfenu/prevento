@@ -31,13 +31,11 @@ let validaciones = [
 // ************ Controller Require ************
 const mainController = require('../controllers/mainController');
 const userController = require('../controllers/userController');
-
-// api
-router.get('/apiu',mainController.apiu)
+const productController = require('../controllers/productController')
 
 // HOME
-router.get('/', mainController.index); 
-router.get('/home',mainController.index)
+router.get('/', productController.vistaListadoProd)
+router.get('/home', productController.vistaListadoProd)
 
 // LOGIN
 // ruta que le paso el array de validaciones para Express Validator
@@ -46,6 +44,5 @@ router.post('/login', validaciones , mainController.loginValidator);
 // REGISTRARSE
 router.get('/register',mainController.vistaCrearUsuario)
 router.post('/register',uploadFile.single('imageProduct'),mainController.accionGuardar) //guardar un nuevo usuario
-router.put('/user/editar/:id',authMiddleware,userController.editarProfile)
 router.get('/admin',authMiddleware, mainController.vistaAdministrador)
 module.exports = router;

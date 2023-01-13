@@ -13,14 +13,6 @@ f.addEventListener("submit", function(event){
         return;
     }
 
-    // listo
-    let price = document.getElementById("price").value;
-    if (price==""){
-        alert("completar el campo precio");
-        // aca corta con el retun
-        return;
-    }
-
     let description = document.getElementById("description").value;
     if (description==""){
         alert("completar el campo descripcion");

@@ -11,7 +11,8 @@ const controller = {
     res.render("accounts/perfil", { session: req.session.usuario });
   },
   editarProfile: (req,res) => {
-    console.log(req.body)
+    console.log(req.body.id)
+    res.send(req.body)
     //res.send(req.body)
     
   }

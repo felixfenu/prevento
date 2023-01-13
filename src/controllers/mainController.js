@@ -17,27 +17,6 @@ const { validationResult } = require("express-validator");
 
 const controller = {
 
-  // api que devuelve un json de usuarios
-  apiu: (req, res) => {
-	
-		db.usuario.findAll()
-		.then((usuarios) =>{
-			
-			let listaUsuariosApi=[];
-		
-			for (usu of usuarios){
-
-        listaUsuariosApi.push(usu);
-			}
-
-			res.json({
-			descripcion: "Lista de usuarios",
-		    codigo: 808,
-			data: listaUsuariosApi})
-			
-		});
-		
-	},
 
   // Root - Show all products|
   // FUNCIONA CON DB
@@ -168,10 +147,12 @@ const controller = {
   vistaAdministrador: (req, res) => {
     db.evento.findAll({
       where: {
-        aprobado: null
-      }
+        aprobado: null,
+      },
+      include:[{association: 'usuario'}],
     })
     .then(resultado => {
+      console.log(resultado)
       res.render("admin", { session: req.session.usuario, eventos: resultado });
     })
     

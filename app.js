@@ -68,11 +68,12 @@ const userRouter = require('./src/routes/userRouter');
 const cartRouter = require('./src/routes/cartRouter');
 const apiRouter = require('./src/routes/apiRouter');
 
-app.use('/user',userRouter);
+
 app.use('/', mainRouter);
 app.use('/products', productRouter);
 app.use('/cart', cartRouter);
 app.use('/api', apiRouter);
+app.use('/user',userRouter);
 
 app.use((req,res,next)=>{
     res.status(404).render('notfound',{session: req.session.usuario})

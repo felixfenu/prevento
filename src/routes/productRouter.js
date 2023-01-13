@@ -19,9 +19,6 @@ const uploadFile = multer({storage})
 // ************ Controller Require ************
 const productController = require('../controllers/productController');
 
-// api
-router.get('/apip',productController.apip)
-
 //products/create
 router.get('/',productController.vistaListadoProd)
 
@@ -32,6 +29,8 @@ router.get('/descripcion/:id',productController.vistaDetalleProd)
 router.get('/editar/:id',authMiddleware,productController.vistaEditarProd)
 router.put('/editar/:id',authMiddleware,uploadFile.single('imageProductEdit'),productController.accionEditar)
 
+router.patch('/:id/aprobar',authMiddleware,productController.aprobarEvento)
+router.patch('/:id/rechazar',authMiddleware,productController.rechazarEvento)
 router.delete('/:id',authMiddleware,productController.accionEliminar)
 
 
