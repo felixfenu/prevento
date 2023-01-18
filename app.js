@@ -34,6 +34,10 @@ const path = require("path")
 const app = express()
 const methodOverride = require('method-override')
 
+// cors para api
+const cors = require('cors');
+app.use(cors())
+
 // EJS
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views/'));
